@@ -1,0 +1,39 @@
+<h2>My Bookings</h2>
+
+<form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+
+  <div>
+    <label for="passengerName">Passenger Name</label>
+    <input id="passengerName" formControlName="passengerName">
+  </div>
+
+  <div>
+    <label for="passengerContactNumber">Passenger Contact Number</label>
+    <input id="passengerContactNumber" formControlName="passengerContactNumber">
+  </div>
+
+  <div>
+    <label for="asap">ASAP</label>
+    <input id="asap" type="checkbox" formControlName="asap">
+  </div>
+
+  <div>
+    <label for="numberOfPassengers">Number Of Passengers</label>
+    <input id="numberOfPassengers" type="number" formControlName="numberOfPassengers">
+  </div>
+
+  <button class="button" type="submit">Book</button>
+
+</form>
+
+<ul class="bookings">
+  <li class="cart-item" *ngFor="let booking of bookings$ | async">
+    <a routerLink="/detail/{{booking.id}}">
+      <span class="badge">{{booking.id}}</span>
+      {{booking.passengerName}}
+      {{booking.price | currency}}
+    </a>
+    <button class="delete" title="delete booking"
+      (click)="delete(booking.id)">x</button>
+  </li>
+</ul>

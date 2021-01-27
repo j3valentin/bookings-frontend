@@ -1,0 +1,41 @@
+<div *ngIf="booking">
+  <h2>{{booking.passengerName | uppercase}} Details</h2>
+  <div><span>id: </span>{{booking.id}}</div>
+
+  <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+
+    <div>
+      <label for="passengerName">Passenger Name</label>
+      <input id="passengerName" placeholder="Passenger Name"
+             [(ngModel)]="booking.passengerName"
+             formControlName="passengerName">
+    </div>
+
+    <div>
+      <label for="passengerContactNumber">Passenger Contact Number</label>
+      <input id="passengerContactNumber"
+             [(ngModel)]="booking.passengerContactNumber"
+             formControlName="passengerContactNumber">
+    </div>
+
+    <div>
+      <label for="asap">ASAP</label>
+      <input id="asap" type="checkbox"
+             [(ngModel)]="booking.asap"
+             formControlName="asap">
+    </div>
+
+    <div>
+      <label for="numberOfPassengers">Number Of Passengers</label>
+      <input id="numberOfPassengers" type="number"
+             [(ngModel)]="booking.numberOfPassengers"
+             formControlName="numberOfPassengers">
+    </div>
+
+    <button class="button" type="submit">Save</button>
+
+  </form>
+
+  <button (click)="goBack()">go back</button>
+
+</div>
