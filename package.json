@@ -29,6 +29,7 @@
     "@ngrx/store-devtools": "^10.1.2",
     "angular-in-memory-web-api": "~0.11.0",
     "rxjs": "~6.6.0",
+    "subsink": "^1.0.2",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
   },

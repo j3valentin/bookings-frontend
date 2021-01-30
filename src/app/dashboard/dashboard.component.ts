@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { SubSink } from 'subsink';
 import { Booking } from '../booking';
 import { BookingService } from '../booking.service';
 
@@ -7,7 +8,8 @@ import { BookingService } from '../booking.service';
   templateUrl: './dashboard.component.html',
   styleUrls: [ './dashboard.component.css' ]
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
+  subs = new SubSink();
   bookings: Booking[] = [];
 
   constructor(private bookingService: BookingService) { }
@@ -17,7 +19,11 @@ export class DashboardComponent implements OnInit {
   }
 
   getBookings(): void {
-    this.bookingService.getBookings()
-      .subscribe(bookings => this.bookings = bookings.slice(1, 5));
+    this.subs.add(this.bookingService.getBookings()
+      .subscribe(bookings => this.bookings = bookings.slice(1, 5)));
+  }
+
+  ngOnDestroy() {
+    this.subs.unsubscribe();
   }
 }
